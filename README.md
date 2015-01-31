@@ -8,7 +8,7 @@ Internationalization library for PHP
 [![Coverage Status](https://coveralls.io/repos/romeOz/rock-i18n/badge.svg?branch=master)](https://coveralls.io/r/romeOz/rock-i18n?branch=master)
 [![License](https://poser.pugx.org/romeOz/rock-i18n/license.svg)](https://packagist.org/packages/romeOz/rock-i18n)
 
-[Rock Url on Packagist](https://packagist.org/packages/romeOz/rock-i18n)
+[Rock i18n on Packagist](https://packagist.org/packages/romeOz/rock-i18n)
 
 Features
 -------------------
