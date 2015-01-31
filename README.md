@@ -1,6 +1,14 @@
 Internationalization library for PHP
 =================
 
+[![Latest Stable Version](https://poser.pugx.org/romeOz/rock-i18n/v/stable.svg)](https://packagist.org/packages/romeOz/rock-i18n)
+[![Total Downloads](https://poser.pugx.org/romeOz/rock-i18n/downloads.svg)](https://packagist.org/packages/romeOz/rock-i18n)
+[![Build Status](https://travis-ci.org/romeOz/rock-i18n.svg?branch=master)](https://travis-ci.org/romeOz/rock-i18n)
+[![HHVM Status](http://hhvm.h4cc.de/badge/romeoz/rock-i18n.svg)](http://hhvm.h4cc.de/package/romeoz/rock-i18n)
+[![Coverage Status](https://coveralls.io/repos/romeOz/rock-i18n/badge.svg?branch=master)](https://coveralls.io/r/romeOz/rock-i18n?branch=master)
+[![License](https://poser.pugx.org/romeOz/rock-i18n/license.svg)](https://packagist.org/packages/romeOz/rock-i18n)
+
+[Rock Url on Packagist](https://packagist.org/packages/romeOz/rock-i18n)
 
 Features
 -------------------
