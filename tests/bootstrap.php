@@ -7,8 +7,7 @@ if (is_file($composerAutoload)) {
 
 $loader->addPsr4('rockunit\\', __DIR__);
 
-$_SERVER['SERVER_NAME'] = $_SERVER['HTTP_HOST'] = 'site.com';
-$_SERVER['REQUEST_URI'] = '/';
+require(dirname(__DIR__) . '/src/polyfills.php');
 date_default_timezone_set('UTC');
 
 defined('ROCKUNIT') or define('ROCKUNIT', __DIR__);
