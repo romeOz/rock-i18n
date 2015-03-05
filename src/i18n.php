@@ -4,9 +4,9 @@ namespace rock\i18n;
 use rock\base\Alias;
 use rock\base\ObjectInterface;
 use rock\base\ObjectTrait;
-use rock\di\Container;
 use rock\helpers\ArrayHelper;
 use rock\helpers\Helper;
+use rock\helpers\Instance;
 use rock\helpers\StringHelper;
 
 class i18n implements ObjectInterface
@@ -258,7 +258,6 @@ class i18n implements ObjectInterface
         return StringHelper::replace($result, $placeholders, $this->removeBraces);
     }
 
-
     /**
      * Get instance.
      *
@@ -267,13 +266,9 @@ class i18n implements ObjectInterface
      * @param string|array $config the configuration. It can be either a string representing the class name
      *                                     or an array representing the object configuration.
      * @return static
-     * @throws \rock\di\ContainerException
      */
     protected static function getInstance($config)
     {
-        if (class_exists('\rock\di\Container')) {
-            return Container::load($config);
-        }
-        return new static();
+        return Instance::ensure($config, static::className());
     }
 }
