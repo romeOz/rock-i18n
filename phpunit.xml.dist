@@ -22,6 +22,7 @@
     <filter>
         <blacklist>
             <file>./src/i18nException.php</file>
+            <file>./src/polyfills.php</file>
         </blacklist>
     </filter>
     <logging>
