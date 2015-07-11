@@ -6,7 +6,6 @@ use rock\base\ObjectInterface;
 use rock\base\ObjectTrait;
 use rock\helpers\ArrayHelper;
 use rock\helpers\Helper;
-use rock\helpers\Instance;
 use rock\helpers\StringHelper;
 
 class i18n implements ObjectInterface
@@ -58,8 +57,8 @@ class i18n implements ObjectInterface
      * i18n::translate(['bar', 'foo']);
      * ```
      *
-     * @param string|array $keys    chain keys
-     * @param array        $placeholders
+     * @param string|array $keys chain keys
+     * @param array $placeholders
      * @return null|string
      */
     public function translate($keys, array $placeholders = [])
@@ -73,18 +72,18 @@ class i18n implements ObjectInterface
     /**
      * Translate.
      *
-     * @param string|array  $keys chain keys
+     * @param string|array $keys chain keys
      * @param array $placeholders
-     * @param string|null  $category
+     * @param string|null $category
      * @param string $locale
      * @return null|string
      */
     public static function t($keys, array $placeholders = [], $category = null, $locale = null)
     {
-        $i18n = static::getInstance(static::className());
+        $i18n = static::getInstance();
         return $i18n
-            ->locale($locale ? : $i18n->locale)
-            ->category($category ? : $i18n->category)
+            ->locale($locale ?: $i18n->locale)
+            ->category($category ?: $i18n->category)
             ->removeBraces(true)
             ->translate($keys, $placeholders);
     }
@@ -146,7 +145,7 @@ class i18n implements ObjectInterface
      * ```
      *
      * @param string|array $keys chain keys
-     * @param mixed  $value
+     * @param mixed $value
      */
     public function add($keys, $value)
     {
@@ -223,7 +222,7 @@ class i18n implements ObjectInterface
      */
     public function addDicts(array $dicts)
     {
-        if (!empty(static::$data)){
+        if (!empty(static::$data)) {
             return;
         }
         foreach ($dicts as $lang => $paths) {
@@ -234,7 +233,7 @@ class i18n implements ObjectInterface
                     throw new i18nException(i18nException::UNKNOWN_FILE, ['path' => $path]);
                     break 2;
                 }
-                $context         = basename($path, '.php');
+                $context = basename($path, '.php');
                 $total[$context] = array_merge(Helper::getValue($total[$context], [], true), $data);
             }
             static::$data[$lang] = array_merge(Helper::getValue(static::$data[$lang], [], true), $total);
@@ -259,16 +258,16 @@ class i18n implements ObjectInterface
     }
 
     /**
-     * Get instance.
+     * Returns self instance.
      *
      * If exists {@see \rock\di\Container} that uses it.
-     *
-     * @param string|array $config the configuration. It can be either a string representing the class name
-     *                                     or an array representing the object configuration.
      * @return static
      */
-    protected static function getInstance($config)
+    protected static function getInstance()
     {
-        return Instance::ensure($config, static::className());
+        if (class_exists('\rock\di\Container')) {
+            return \rock\di\Container::load(static::className());
+        }
+        return new static();
     }
 }
