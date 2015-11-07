@@ -8,19 +8,19 @@ Internationalization library for PHP
 [![Coverage Status](https://coveralls.io/repos/romeOz/rock-i18n/badge.svg?branch=master)](https://coveralls.io/r/romeOz/rock-i18n?branch=master)
 [![License](https://poser.pugx.org/romeOz/rock-i18n/license.svg)](https://packagist.org/packages/romeOz/rock-i18n)
 
-[Rock i18n on Packagist](https://packagist.org/packages/romeOz/rock-i18n)
-
 Features
 -------------------
 
- * Module for [Rock Framework](https://github.com/romeOz/rock)
+ * Standalone module/component for [Rock Framework](https://github.com/romeOz/rock)
 
 Installation
 -------------------
 
 From the Command Line:
 
-```composer require romeoz/rock-i18n:*```
+```
+composer require romeoz/rock-i18n
+```
 
 In your composer.json:
 
@@ -83,7 +83,7 @@ Adds dicts as paths.
 use rock\i18n\i18n;
 
 $config = [
-    'pathsDicts' => [ 
+    'pathDicts' => [ 
         'en' => [
                 'path/to/en/lang.php',
                 'path/to/en/validate.php',
