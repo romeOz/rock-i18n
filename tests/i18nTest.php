@@ -9,7 +9,7 @@ class i18nTest extends \PHPUnit_Framework_TestCase
     public function testAdd()
     {
         $i18n = new i18n();
-        $i18n->locale('test')->category('lang');
+        $i18n->setLocale('test')->setCategory('lang');
         $i18n->add('foo.bar', 'text {{placeholder}}');
         $this->assertSame(
             [
@@ -31,13 +31,13 @@ class i18nTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('text baz', $i18n->translate('foo.bar', ['placeholder' => 'baz']));
 
         // not replace placeholder
-        $this->assertSame('text {{placeholder}}', $i18n->removeBraces(false)->translate('foo.bar'));
+        $this->assertSame('text {{placeholder}}', $i18n->setRemoveBraces(false)->translate('foo.bar'));
     }
 
     public function testRemove()
     {
         $i18n = new i18n();
-        $i18n->locale('test')->category('lang');
+        $i18n->setLocale('test')->setCategory('lang');
         $i18n->addMulti([
             'test' => [
                 'lang' => [
@@ -72,22 +72,22 @@ class i18nTest extends \PHPUnit_Framework_TestCase
     public function testUnknownThrowException()
     {
         $i18n = new i18n();
-        $i18n->locale('en')->category('lang');
+        $i18n->setLocale('en')->setCategory('lang');
         $i18n->translate('foo.bar');
     }
 
     public function testUnknownWithoutThrowException()
     {
         $i18n = new i18n();
-        $i18n->throwException = false;
-        $i18n->locale('en')->category('lang');
+        $i18n->setThrowException(false);
+        $i18n->setLocale('en')->setCategory('lang');
         $this->assertNull($i18n->translate('foo.bar'));
     }
 
     public function testAddDicts()
     {
         (new i18n)->clear();
-        $i18n = new i18n(['pathsDicts' => [
+        $i18n = new i18n(['pathDicts' => [
             'ru' => [
                 ROCKUNIT . '/data/lang/ru/lang.php',
             ],
