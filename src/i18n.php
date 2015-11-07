@@ -13,40 +13,86 @@ class i18n implements ObjectInterface
     use ObjectTrait;
 
     /**
-     * List paths to dicts.
-     * @var array
-     */
-    public $pathsDicts = [];
-    /**
      * Default locale.
      * @var string
      */
-    public $locale = 'en';
+    protected $locale = 'en';
     /**
      * Default category.
      * @var string
      */
-    public $category = 'lang';
+    protected $category = 'lang';
     /**
-     * Remove braces in record.
+     * Enable removes a braces to message.
      * @var bool
      */
-    public $removeBraces = true;
+    protected $removeBraces = true;
     /**
-     * Throws an exception if the i18n-record was not found.
+     * Enable throw exception. When message not found.
      * @var bool
      */
-    public $throwException = true;
+    protected $throwException = true;
     /**
      * Cache records.
      * @var array
      */
     protected static $data = [];
 
-    public function init()
+
+    /**
+     * Sets a list paths to dictionaries.
+     * @param array $paths
+     * @return $this
+     * @throws i18nException
+     */
+    public function setPathDicts(array $paths)
     {
-        $this->locale = strtolower($this->locale);
-        $this->addDicts($this->pathsDicts);
+        $this->addDicts($paths);
+        return $this;
+    }
+
+    /**
+     * Sets a locale.
+     * @param string $locale
+     * @return $this
+     */
+    public function setLocale($locale)
+    {
+        $this->locale = strtolower($locale);
+        return $this;
+    }
+
+    /**
+     * Sets a category.
+     * @param string $category
+     * @return $this
+     */
+    public function setCategory($category)
+    {
+        $this->category = $category;
+        return $this;
+    }
+
+    /**
+     * Enable removes a braces to message.
+     * @param bool $enable
+     * @return $this
+     */
+    public function setRemoveBraces($enable = false)
+    {
+        $this->removeBraces = $enable;
+        return $this;
+    }
+
+    /**
+     * Enable throw exception. When message not found.
+     * @param bool $enable
+     * @return $this
+     */
+    public function setThrowException($enable)
+    {
+        $this->throwException = $enable;
+        return $this;
     }
 
     /**
@@ -82,43 +128,10 @@ class i18n implements ObjectInterface
     {
         $i18n = static::getInstance();
         return $i18n
-            ->locale($locale ?: $i18n->locale)
-            ->category($category ?: $i18n->category)
-            ->removeBraces(true)
+            ->setLocale($locale ?: $i18n->locale)
+            ->setCategory($category ?: $i18n->category)
+            ->setRemoveBraces(true)
             ->translate($keys, $placeholders);
-    }
-
-    /**
-     * Select locale.
-     * @param string $locale
-     * @return $this
-     */
-    public function locale($locale)
-    {
-        $this->locale = $locale;
-        return $this;
-    }
-
-    /**
-     * Select category.
-     * @param string $category
-     * @return $this
-     */
-    public function category($category)
-    {
-        $this->category = $category;
-        return $this;
-    }
-
-    /**
-     * Removes braces in i18n-record.
-     * @param bool $removeBraces
-     * @return $this
-     */
-    public function removeBraces($removeBraces = false)
-    {
-        $this->removeBraces = $removeBraces;
-        return $this;
     }
 
     /**
